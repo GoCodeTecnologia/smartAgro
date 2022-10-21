@@ -23,7 +23,7 @@ def show():
 
 def bar():
     l4 = Label(janela,text="Carregando aplicação...",fg="DarkGreen",bg="white")
-    l4.place(x=0,y=210)
+    l4.place(x=50,y=210)
     import time
     r=0
     for i in range(100):
@@ -38,13 +38,13 @@ progress = Progressbar(janela,orient=HORIZONTAL,length=500,mode='determinate')
 progress.place(x=-10,y=235)
 
 lbl_title = Label(janela,text="SmartAgro",font=("Ivy 20 bold"),fg="DarkGreen",bg="white")
-lbl_title.place(x=140,y=80)
+lbl_title.place(x=50,y=80)
 
 lbl_subtitle = Label(janela,text="Soluções Agrônomo Inteligente",font=("Ivy 10 bold"),fg="DarkGreen",bg="white")
-lbl_subtitle.place(x=110,y=115)
+lbl_subtitle.place(x=50,y=115)
 
 btn = Button(janela, width=10, height=1, text="Acessar", 
     command=bar, relief='flat', bg="DarkGreen", fg='white',font=("Ivy 10 bold"))
-btn.place(x=170,y=180)
+btn.place(x=50,y=180)
 
 janela.mainloop()
