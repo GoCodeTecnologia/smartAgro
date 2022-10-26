@@ -2,7 +2,7 @@
 
 Trabalho APS do curso de Ciência da Computação 2022 - 2º semestre<br>
 
-Desenvolvimento de uma aplicação em Python para a empresa smartAgro, com o foco no gerenciamento agronomo sustentável.<br>
+Desenvolvimento de uma aplicação em Python para a empresa smartAgro, com o objetivo de gerar métricas para o gerenciamento agronomo sustentável.<br>
 
 <h3>Tecnologias utilizadas:</h3>
 
