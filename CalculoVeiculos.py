@@ -50,9 +50,7 @@ def calcVeiculo():
     # Cores da aplicação
     principal = "#003d59";
     secundaria = "#01826e";
-    textRed = "#eb0202";
     textBlue = "#002ef4";
-    bgClean = "#d4dde1";
 
     largura = 900
     altura = 600

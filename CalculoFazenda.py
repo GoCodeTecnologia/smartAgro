@@ -1,7 +1,6 @@
 from tkinter import*
 from tkinter import Tk,font, ttk
 from tkinter import messagebox
-import math
 
 def calcFazenda():
     janela = Toplevel()
@@ -25,17 +24,21 @@ def calcFazenda():
                 valueTratado = value
                 if (valueTratado < 100):
                     result = (valueTratado * co2Reais)
-                    resultadoEnergia = ((valueTratado * co2Reais) * mes) #cálculo de 12 mês
+                    resultadoEnergia = ((valueTratado * co2Reais) * mes)
                 else:
                     result = (valueTratado * co2Reais)
-                    resultadoEnergia = (((valueTratado * co2Reais) * mes) / 100) #cálculo de 12 mês
+                    resultadoEnergia = (((valueTratado * co2Reais) * mes) / 100)
+                lbl_valor.config(text="R$ {} reais".format(valor))
                 
             elif (tipo == "Kwh"):
                 value = valor
                 result = (value * co2Kwh)
-                resultadoEnergia = ((value * co2Kwh) * mes) #cálculo de 12 mês
+                resultadoEnergia = ((value * co2Kwh) * mes)
+                lbl_valor.config(text="{} kws".format(valor))
 
             lbl_resultado_carbono.config(text="Emissão em Kg de CO2e: {}".format(round(resultadoEnergia, 2)))
+            lbl_mes.config(text="{} mes(es)".format(mes))
+            lbl_tipo.config(text="Tipo de cálculo escolhido: {}".format(tipo))
 
         except:
             messagebox.showerror("Erro","Dados inválidos ou não informados")
@@ -44,9 +47,7 @@ def calcFazenda():
     # Cores da aplicação
     principal = "#003d59";
     secundaria = "#01826e";
-    textRed = "#eb0202";
     textBlue = "#002ef4";
-    bgClean = "#d4dde1";
 
     largura = 900
     altura = 600
@@ -110,28 +111,21 @@ def calcFazenda():
         font=("Nunito 15 bold"),fg=textBlue,bg="white")
     lbl_resultado_carbono.place(x=350,y=40)
 
-    lbl_title_resultado = Label(boxBtn,text="Árvores necessárias para compensação de CO²",
-        font=("Nunito 15 bold"),fg=principal,bg="white")
-    lbl_title_resultado.place(x=350,y=70)
-    lbl_resultado_arvores = Label(boxBtn,
-        font=("Nunito 15 bold"),fg=secundaria,bg="white")
-    lbl_resultado_arvores.place(x=350,y=100)
-
     lbl_title_resultado = Label(boxBtn,text="Informações",
         font=("Nunito 15 bold"),fg=principal,bg="white")
     lbl_title_resultado.place(x=350,y=130)
 
-    lbl_km = Label(boxBtn,
+    lbl_valor = Label(boxBtn,
         font=("Nunito 15 bold"),fg=secundaria,bg="white")
-    lbl_km.place(x=350,y=160)
+    lbl_valor.place(x=350,y=160)
 
-    lbl_combus = Label(boxBtn,
+    lbl_mes = Label(boxBtn,
         font=("Nunito 15 bold"),fg=secundaria,bg="white")
-    lbl_combus.place(x=350,y=190)
+    lbl_mes.place(x=350,y=190)
 
-    lbl_motor = Label(boxBtn,
+    lbl_tipo = Label(boxBtn,
         font=("Nunito 15 bold"),fg=secundaria,bg="white")
-    lbl_motor.place(x=350,y=220)
+    lbl_tipo.place(x=350,y=220)
 
     # Texto de footer
     lbl_credits = Label(janela,text="GoCode Tecnologia, 2022",fg=secundaria,bg="white")
