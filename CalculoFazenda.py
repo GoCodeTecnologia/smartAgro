@@ -4,7 +4,7 @@ from tkinter import messagebox
 
 def calcFazenda():
     janela = Toplevel()
-    janela.title("SmartAgro - Emissão CO² Fazenda")
+    janela.title("SmartAgro - Emissão CO² Energia Fazenda")
     # janela.iconbitmap('assets/icon.ico')
 
     def calcEmissaoFazenda():
@@ -75,7 +75,7 @@ def calcFazenda():
     container = Frame(janela,width=880,height=490)
     container.place(x=10,y=80)
 
-    lbl_title_parameter = Label(container,text="Calcular emissão de CO² - Fazenda",font=("Nunito 18 bold"),fg=principal)
+    lbl_title_parameter = Label(container,text="Calcular emissão de CO² - Energia Fazenda",font=("Nunito 18 bold"),fg=principal)
     lbl_title_parameter.place(x=20,y=10)
     boxBtn = Frame(container,width=840,height=420,bg="white")
     boxBtn.place(x=20,y=50)

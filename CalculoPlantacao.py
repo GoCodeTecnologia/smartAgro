@@ -7,34 +7,22 @@ def calcPlantacao():
     janela.title("SmartAgro - Emissão CO² Plantação")
     # janela.iconbitmap('assets/icon.ico')
 
-    def calCalcario():
+    def calcEmissaoPlantacao():
         try:
-            klCalc = float(input_calcario.get())
-            klDolomitico = float(input_dolomito.get())
+            area = float(input_area.get())
+            sementes = float(input_qtd_sementes.get())
+            if area <0:
+                messagebox.showerror("Erro","Insira uma quantidade válida")
+            elif sementes<0:
+                messagebox.showerror("Erro","Insira uma quantidade válida")
 
-            if klCalc <0:
-                messagebox.showerror("Erro","Insira valores válidos")
-            elif klDolomitico <0:
-                messagebox.showerror("Erro","Insira valores válidos")
+            fatorSemente = 0.92
+            resultadoSemente = (area * sementes * fatorSemente)
 
-            fatorCalcario = 0.12
-            fatorDolomitico = 0.13
-            resultadoCalc = ((klCalc * fatorCalcario + klDolomitico * fatorDolomitico) * 44 / 12)
-            lbl_resultado_calcario.config(text=round(resultadoCalc, 2))
-            lbl_metrica_calcario.config(text="O Calcário é um insumo agrícola usado para elevar o pH\n(potencial hidrogeniônico) do solo, o que diminui a acidez")
-        except:
-            messagebox.showerror("Erro","Dados inválidos ou não informados")
-            janela.destroy()
+            lbl_resultado.config(text="Emissão em de CO2e: {} kg's".format(round(resultadoSemente, 3)))
+            lbl_area.config(text="Área de plantio: {} metros".format(area))
+            lbl_sementes.config(text="Quantidade média de sementes: {}".format(sementes))
 
-    def calcUreia():
-        try:
-            kl = float(input_ureia.get())
-            if kl <0:
-                messagebox.showerror("Erro","Insira valores válidos")
-            fatorUreia = 0.20
-            resultado = (kl * fatorUreia * 44 / 12)
-            lbl_resultado_ureia.config(text=round(resultado,2))
-            lbl_metrica_ureia.config(text="A Uréia é um fertilizante sólido muito utilizado para adubação\nem grandes quantidades e com grande eficácia")
         except:
             messagebox.showerror("Erro","Dados inválidos ou não informados")
             janela.destroy()
@@ -63,75 +51,53 @@ def calcPlantacao():
     # Textos de titulo e subtitulo
     lbl_title = Label(janela,text="SmartAgro",font=("Ivy 20 bold"),fg=principal,bg="white")
     lbl_title.place(x=10,y=20)
-    lbl_subtitle = Label(janela,text="Soluções Agrônomas Inteligente",fg=secundaria,bg="white")
+    lbl_subtitle = Label(janela,text="Soluções Agrônomo Inteligente",fg=secundaria,bg="white")
     lbl_subtitle.place(x=10,y=55)
 
     # Corpo da aplicação
     container = Frame(janela,width=880,height=490)
     container.place(x=10,y=80)
 
-    # Cálculo da emissão de uréia
-
     lbl_title_parameter = Label(container,text="Calcular emissão de CO² - Plantação",font=("Nunito 18 bold"),fg=principal)
     lbl_title_parameter.place(x=20,y=10)
-    boxBtn = Frame(container,width=840,height=140,bg="white")
+    boxBtn = Frame(container,width=840,height=420,bg="white")
     boxBtn.place(x=20,y=50)
 
-    boxBtn2 = Frame(container,width=840,height=190,bg="white")
-    boxBtn2.place(x=20,y=200)
-    # Formulario de calculo
-    lbl_ureia = Label(boxBtn,text="Calculo com Uréia",font=("Nunito 15 bold"),fg=principal,bg="white")
-    lbl_ureia.place(x=20,y=10)
-    lbl_ureia = Label(boxBtn,text="Digite a quantidade de kilos de uréia",font=("Nunito 8"),fg=secundaria,bg="white")
-    lbl_ureia.place(x=20,y=40)
-    input_ureia = Entry(boxBtn,width=48,highlightthickness=1,relief=FLAT)
-    input_ureia.place(x=20,y=60)
-    input_ureia.config(highlightbackground=principal, highlightcolor=principal)
+    lbl_area = Label(boxBtn,text="Informe a área de plantio",font=("Nunito 15 bold"),fg=principal,bg="white")
+    lbl_area.place(x=20,y=10)
+    input_area = Entry(boxBtn,width=48,highlightthickness=1,relief=FLAT)
+    input_area.place(x=20,y=40)
+    input_area.config(highlightbackground=principal, highlightcolor=principal)
+
+    lbl_qtd_sementes = Label(boxBtn,text="Informe a quantidade média de sementes",font=("Nunito 15 bold"),fg=principal,bg="white")
+    lbl_qtd_sementes.place(x=20,y=70)
+    input_qtd_sementes = Entry(boxBtn,width=48,highlightthickness=1,relief=FLAT)
+    input_qtd_sementes.place(x=20,y=100)
+    input_qtd_sementes.config(highlightbackground=principal, highlightcolor=principal)
 
     btn_calcular = Button(boxBtn,width=22, height=1, text="Calcular", relief='flat',
-        bg=secundaria, fg='white',font=("Nunito 15 bold"),command=calcUreia)
-    btn_calcular.place(x=20,y=90)
+        bg=secundaria, fg='white',font=("Nunito 15 bold"),command=calcEmissaoPlantacao)
+    btn_calcular.place(x=20,y=360)
+
     # Resultado dos cálculos
-    lbl_title_resultado = Label(boxBtn,text="Total de emissão do carbono da uréia",
+    lbl_title_resultado = Label(boxBtn,text="Total de emissão do carbono",
         font=("Nunito 15 bold"),fg=principal,bg="white")
     lbl_title_resultado.place(x=350,y=10)
-    lbl_resultado_ureia = Label(boxBtn,
+    lbl_resultado = Label(boxBtn,
         font=("Nunito 15 bold"),fg=textBlue,bg="white")
-    lbl_resultado_ureia.place(x=350,y=40)
-    lbl_metrica_ureia = Label(boxBtn,
-        font=("Nunito 10 bold"),fg=textBlue,bg="white",justify=LEFT)
-    lbl_metrica_ureia.place(x=350,y=70)
-    
-    # =====================================================================================================
-    # Calculo de emissão do calcário
-    # Formulario de calculo
-    lbl_calcario = Label(boxBtn2,text="Calculo com Calcário",font=("Nunito 15 bold"),fg=principal,bg="white")
-    lbl_calcario.place(x=20,y=10)
-    lbl_calcario = Label(boxBtn2,text="Digite a quantidade de quilos de calcário",font=("Nunito 9"),fg=secundaria,bg="white")
-    lbl_calcario.place(x=20,y=40)
-    input_calcario = Entry(boxBtn2,width=48,highlightthickness=1,relief=FLAT)
-    input_calcario.place(x=20,y=60)
-    input_calcario.config(highlightbackground=principal, highlightcolor=principal)
+    lbl_resultado.place(x=350,y=40)
 
-    lbl_dolomito = Label(boxBtn2,text="Digite a quantidade de quilos de dolomito",font=("Nunito 9"),fg=secundaria,bg="white")
-    lbl_dolomito.place(x=20,y=90)
-    input_dolomito = Entry(boxBtn2,width=48,highlightthickness=1,relief=FLAT)
-    input_dolomito.place(x=20,y=110)
-    input_dolomito.config(highlightbackground=principal, highlightcolor=principal)
-
-    btn_calcular = Button(boxBtn2,width=22, height=1, text="Calcular", relief='flat',
-        bg=secundaria, fg='white',font=("Nunito 15 bold"),command=calCalcario)
-    btn_calcular.place(x=20,y=140)
-    # Resultado dos cálculos
-    lbl_title_resultado = Label(boxBtn2,text="Total de emissão do carbono do calcário",
+    lbl_title_resultado = Label(boxBtn,text="Informações",
         font=("Nunito 15 bold"),fg=principal,bg="white")
-    lbl_title_resultado.place(x=350,y=10)
-    lbl_resultado_calcario = Label(boxBtn2,
-        font=("Nunito 15 bold"),fg=textBlue,bg="white")
-    lbl_resultado_calcario.place(x=350,y=40)
-    lbl_metrica_calcario = Label(boxBtn2,
-        font=("Nunito 10 bold"),fg=textBlue,bg="white",justify=LEFT)
-    lbl_metrica_calcario.place(x=350,y=80)
+    lbl_title_resultado.place(x=350,y=130)
+
+    lbl_area = Label(boxBtn,
+        font=("Nunito 15 bold"),fg=secundaria,bg="white")
+    lbl_area.place(x=350,y=160)
+
+    lbl_sementes = Label(boxBtn,
+        font=("Nunito 15 bold"),fg=secundaria,bg="white")
+    lbl_sementes.place(x=350,y=190)
 
     # Texto de footer
     lbl_credits = Label(janela,text="GoCode Tecnologia, 2022",fg=secundaria,bg="white")

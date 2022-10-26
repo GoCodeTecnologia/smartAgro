@@ -11,6 +11,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from CalculoFazenda import*
 from CalculoPlantacao import*
 from CalculoVeiculos import*
+from CalculoFertilizante import*
 
 def dashboard():
     janela = Tk()
@@ -91,8 +92,8 @@ def dashboard():
         cur_ems = conn.cursor()
         cur_ems_veiculo = conn.cursor()
 
-        query_total_emissao = "SELECT SUM(total_emissao) FROM ems_veiculo;"
-        query_total_compensa = "SELECT SUM(total_compensa) FROM ems_veiculo;"
+        query_total_emissao = "SELECT SUM(total_emissao) FROM tb_emissao_veiculo;"
+        query_total_compensa = "SELECT SUM(total_compensa) FROM tb_emissao_veiculo;"
         query_total_veiculo = "SELECT SUM(total_emissao) FROM tb_emissao_veiculo;"
         cur.execute(query_total_emissao)
         cur_ems.execute(query_total_compensa)
@@ -105,27 +106,27 @@ def dashboard():
         lbl_result_bx2.config(text=total_compensa)
         lbl_result_bx3.config(text=total_veiculo)
 
-    btn_calcFazenda = Button(boxBtn,width=22, height=1, text="Emissão Fazenda", relief='flat',
+    btn_calcFazenda = Button(boxBtn,width=22, height=1, text="Emissão Energia Fazenda", relief='flat',
         bg=principal, fg='white',font=("Nunito 10 bold"),command=calcFazenda)
     btn_calcFazenda.place(x=5,y=10)
 
-    btn_calVeiculo = Button(boxBtn,width=22, height=1, text="Emissão Veículo", relief='flat',
-        bg=principal, fg='white',font=("Nunito 10 bold"),command=calcVeiculo)
-    btn_calVeiculo.place(x=5,y=50)
+    btn_calFertilizante = Button(boxBtn,width=22, height=1, text="Emissão Fertilizante", relief='flat',
+        bg=principal, fg='white',font=("Nunito 10 bold"),command=calcFertilizante)
+    btn_calFertilizante.place(x=5,y=50)
 
-    btn_calPlantacao = Button(boxBtn,width=22, height=1, text="Emissão Fertilizante", relief='flat',
+    btn_calPlantacao = Button(boxBtn,width=22, height=1, text="Emissão Plantação", relief='flat',
         bg=principal, fg='white',font=("Nunito 10 bold"),command=calcPlantacao)
     btn_calPlantacao.place(x=5,y=90)
 
-    btn_calPlantacao = Button(boxBtn,width=22, height=1, text="Dados da Fazenda", relief='flat',
-        bg=secundaria, fg='white',font=("Nunito 10 bold"))
-    btn_calPlantacao.place(x=5,y=150)
+    btn_calVeiculo = Button(boxBtn,width=22, height=1, text="Emissão Veículo", relief='flat',
+        bg=principal, fg='white',font=("Nunito 10 bold"),command=calcVeiculo)
+    btn_calVeiculo.place(x=5,y=130)
 
-    btn_calPlantacao = Button(boxBtn,width=22, height=1, text="Gráficos", relief='flat',
+    btn_calPlantacao = Button(boxBtn,width=22, height=1, text="Minha Fazenda", relief='flat',
         bg=secundaria, fg='white',font=("Nunito 10 bold"))
     btn_calPlantacao.place(x=5,y=190)
 
-    btn_calPlantacao = Button(boxBtn,width=22, height=1, text="Exportar", relief='flat',
+    btn_calPlantacao = Button(boxBtn,width=22, height=1, text="Gráficos", relief='flat',
         bg=secundaria, fg='white',font=("Nunito 10 bold"))
     btn_calPlantacao.place(x=5,y=230)
 
