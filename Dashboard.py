@@ -10,6 +10,8 @@ from CalculoVeiculos import*
 from CalculoFertilizante import*
 
 from CadDadosFazenda import*
+from CadDadosVeiculo import*
+from CadDadosFazenda import*
 
 def dashboard():
     janela = Tk()
@@ -19,9 +21,6 @@ def dashboard():
     # Cores da aplicação
     principal = "#003d59";
     secundaria = "#01826e";
-    textRed = "#eb0202";
-    textBlue = "#002ef4";
-    bgClean = "#d4dde1";
 
     largura = 900
     altura = 600
@@ -66,20 +65,21 @@ def dashboard():
 
     box_menu3 = Frame(container,width=200,height=100,bg=principal)
     box_menu3.place(x=440,y=20)
-    lbl_title_bx3 = Label(box_menu3,text="Emissão Total dos Veículos",font=("Nunito 10 bold"),fg="white",bg=principal)
+    lbl_title_bx3 = Label(box_menu3,text="Emissão Total da Fazenda",font=("Nunito 10 bold"),fg="white",bg=principal)
     lbl_title_bx3.place(x=10,y=10)
     lbl_result_bx3 = Label(box_menu3,font=("Nunito 20 bold"),fg="white",bg=principal)
     lbl_result_bx3.place(x=10,y=50)
 
     box_menu4 = Frame(container,width=200,height=100,bg=principal)
     box_menu4.place(x=650,y=20)
-    lbl_title_bx4 = Label(box_menu4,text="Status Minha Fazenda",font=("Nunito 12 bold"),fg="white",bg=principal)
+    lbl_title_bx4 = Label(box_menu4,text="Emissão Total da Plantação",font=("Nunito 10 bold"),fg="white",bg=principal)
     lbl_title_bx4.place(x=10,y=10)
     lbl_result_bx4 = Label(box_menu4,text="0",font=("Nunito 20 bold"),fg="white",bg=principal)
     lbl_result_bx4.place(x=10,y=50)
 
     lbl_title_parameter = Label(container,text="Realizar Cálculos",font=("Nunito 18 bold"),fg=principal)
     lbl_title_parameter.place(x=20,y=150)
+
     boxBtn = Frame(container,width=200,height=280,bg="white")
     boxBtn.place(x=20,y=190)
     boxBtn2 = Frame(container,width=620,height=280,bg="white")
@@ -120,30 +120,21 @@ def dashboard():
         bg=principal, fg='white',font=("Nunito 10 bold"),command=calcVeiculo)
     btn_calVeiculo.place(x=5,y=130)
 
-    btn_calPlantacao = Button(boxBtn,width=22, height=1, text="Minha Fazenda", relief='flat',
-        bg=secundaria, fg='white',font=("Nunito 10 bold"))
-    btn_calPlantacao.place(x=5,y=190)
-
-    btn_calPlantacao = Button(boxBtn,width=22, height=1, text="Gráficos", relief='flat',
+    btn_calPlantacao = Button(boxBtn,width=22, height=1, text="Dados da Fazenda", relief='flat',
         bg=secundaria, fg='white',font=("Nunito 10 bold"))
     btn_calPlantacao.place(x=5,y=230)
-
     # ==================================================================================================
     btn_cadFazenda = Button(boxBtn2,width=22, height=3, text="Cadastrar Dados Fazenda", relief='flat',
         bg=principal, fg='white',font=("Nunito 10 bold"),command=cadDadosFazenda)
     btn_cadFazenda.place(x=10,y=10)
 
-    btn_cadVeiculos = Button(boxBtn2,width=22, height=3, text="Cadastrar Dados Veículos", relief='flat',
-        bg=principal, fg='white',font=("Nunito 10 bold"))
-    btn_cadVeiculos.place(x=210,y=10)
-
     btn_cadPlantacao = Button(boxBtn2,width=22, height=3, text="Cadastrar Dados Plantação", relief='flat',
         bg=principal, fg='white',font=("Nunito 10 bold"))
     btn_cadPlantacao.place(x=10,y=90)
 
-
-
-
+    btn_cadVeiculos = Button(boxBtn2,width=22, height=3, text="Cadastrar Dados Veículos", relief='flat',
+        bg=principal, fg='white',font=("Nunito 10 bold"),command=cadDadosVeiculo)
+    btn_cadVeiculos.place(x=10,y=170)
 
     # ==================================================================================================
     # Texto de footer

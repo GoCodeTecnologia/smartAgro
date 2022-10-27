@@ -50,6 +50,7 @@ def cadDadosFazenda():
                     else:
                         result = (valueTratado * co2Reais)
                         resultadoEnergia = (((valueTratado * co2Reais) * mes) / 100)
+                    total_emissao = round(resultadoEnergia,2)
                         
                 elif (tipo == "Kwh"):
                     value = valor
