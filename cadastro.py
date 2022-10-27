@@ -25,41 +25,44 @@ janela.geometry("%dx%d+%d+%d" % (largura,altura,posx,posy))
 janela.configure(bg="white")
 janela.resizable(0,0)
 
-def calcEmissaoVeiculo():
+def calcEmissaoPlantacao():
     try:
-        tipo_veiculo = input_tipo_veiculo.get()
-        distancia = round(float(input_distancia.get()),4)
-        motor = input_tipo_motor.get()
-        combustivel = input_tipo_combustivel.get()
+        tipo_fertilizante = input_fertilizante.get()
+        quilo = float(input_quilo.get())
+        quilo_dolomito = float(input_qtd_dolomito.get())
+        area = float(input_area.get())
+        sementes = float(input_qtd_sementes.get())
 
-        if distancia <0:
-                messagebox.showerror("Erro","Insira uma distância real")
+        if tipo_fertilizante == "Calcário":
+        # Calcario
+            fatorCalcario = 0.12
+            fatorDolomitico = 0.13
 
-        resultadoMotorComb = 0
-        if (combustivel == "Diesel"):
-            resultadoMotorComb = 0.2348
-        else:
-            resultadoMotorComb = motorComb[combustivel][motor]
-        resultado = round((distancia * resultadoMotorComb) * 12, 2)
+            resultado = ((quilo * fatorCalcario + quilo_dolomito * fatorDolomitico) * 44 / 12)
 
-        resultadoFinal = round(((resultado) / 1000), 2)
-        if (math.isnan(resultadoFinal) == True):
-            resultadoFinal = 0
-        resultadoArvores = round(math.ceil((resultadoFinal*1000)/190*1.2), 0)
-        resultadoReais = resultadoArvores * 15
-        resultadoReais = round(resultadoReais, 2)
+        elif tipo_fertilizante == "Uréia":
+        # Ureia
+            quilo_dolomito = 0
+            fatorUreia = 0.20
+            resultado = (quilo * fatorUreia * 44 / 12)
 
-        lista_inserir = [tipo_veiculo, distancia, motor, combustivel, resultadoReais, resultadoArvores]
+        fatorSemente = 0.92
+        resultadoSemente = (area * sementes * fatorSemente)
+
+        total_emissao = round((resultado + resultadoSemente),4)
+
+        lista_inserir = [tipo_fertilizante, quilo, quilo_dolomito, area, sementes, total_emissao]
 
         for i in lista_inserir:
             if i=='':
                 messagebox.showerror("Erro","Dados vazios")
                 return
 
-        inserir_dados_veiculo(lista_inserir)
+        inserir_dados_plantacao(lista_inserir)
         mostrar()             
     except:
         messagebox.showerror("Erro","Dados inválidos ou não informados")
+        janela.destroy()
 
 # Dados do combo box
 lstMotor = [
@@ -135,36 +138,44 @@ lbl_subtitle.place(x=10,y=55)
 container = Frame(janela,width=980,height=490)
 container.place(x=10,y=80)
 
-lbl_title_parameter = Label(container,text="Cadastro de Dados dos Veículos",font=("Nunito 18 bold"),fg=principal)
+lbl_title_parameter = Label(container,text="Cadastro de Dados da Plantação",font=("Nunito 18 bold"),fg=principal)
 lbl_title_parameter.place(x=20,y=10)
 boxBtn = Frame(container,width=940,height=420,bg="white")
 boxBtn.place(x=20,y=50)
 
 # ==========================================================================================================
 # Formulário e Inputs
-lstTipo = ["Carro","Caminhão","Trator","Pulverizador","Colhedor de Cana"]
-lbl_tipo_veiculo = Label(boxBtn,text="Tipo Veiculo",font=("Nunito 10 bold"),fg=principal,bg="white")
-lbl_tipo_veiculo.place(x=20,y=10)
-input_tipo_veiculo = ttk.Combobox(boxBtn, width=25, values=lstTipo, state="readonly")
-input_tipo_veiculo.place(x=20,y=40)
+lstTipo = ["Calcário","Uréia"]
+lbl_input_fertilizante = Label(boxBtn,text="Tipo do Fertilizante",font=("Nunito 10 bold"),fg=principal,bg="white")
+lbl_input_fertilizante.place(x=20,y=10)
+input_fertilizante = ttk.Combobox(boxBtn, width=25, values=lstTipo, state="readonly")
+input_fertilizante.place(x=20,y=40)
 
-lstTipo = ["Dinheiro","Kwh"]
-lbl_dstancia = Label(boxBtn,text="Distancia",font=("Nunito 10 bold"),fg=principal,bg="white")
-lbl_dstancia.place(x=250,y=10)
-input_distancia =Entry(boxBtn,width=25,highlightthickness=1,relief=FLAT)
-input_distancia.place(x=250,y=40)
-input_distancia.config(highlightbackground=principal, highlightcolor=principal)
+lbl_quilo = Label(boxBtn,text="Quantidade de kilos",font=("Nunito 10 bold"),fg=principal,bg="white")
+lbl_quilo.place(x=250,y=10)
+input_quilo = Entry(boxBtn,width=25,highlightthickness=1,relief=FLAT)
+input_quilo.place(x=250,y=40)
+input_quilo.config(highlightbackground=principal, highlightcolor=principal)
 
-lbl_tipo_motor = Label(boxBtn,text="Motor",font=("Nunito 10 bold"),fg=principal,bg="white")
-lbl_tipo_motor.place(x=450,y=10)
-input_tipo_motor = ttk.Combobox(boxBtn, width=25, values=lstMotor, state="readonly")
-input_tipo_motor.place(x=450,y=40)
+lbl_qtd_dolomito = Label(boxBtn,text="Quantidade de dolomito",font=("Nunito 10 bold"),fg=principal,bg="white")
+lbl_qtd_dolomito.place(x=450,y=10)
+lbl_qtd_dolomito = Label(boxBtn,text="*Quando CALCÁRIO insira 0",font=("Nunito 8 bold"),fg=secundaria,bg="white")
+lbl_qtd_dolomito.place(x=450,y=60)
+input_qtd_dolomito = Entry(boxBtn,width=25,highlightthickness=1,relief=FLAT)
+input_qtd_dolomito.place(x=450,y=40)
+input_qtd_dolomito.config(highlightbackground=principal, highlightcolor=principal)
 
-lbl_tipo_combustivel = Label(boxBtn,text="Combustível",font=("Nunito 10 bold"),fg=principal,bg="white")
-lbl_tipo_combustivel.place(x=650,y=10)
-lstCombustivel = ["Diesel","Flex","Gasolina","GNV"]
-input_tipo_combustivel = ttk.Combobox(boxBtn, width=25, values=lstCombustivel, state="readonly")
-input_tipo_combustivel.place(x=650,y=40)
+lbl_area = Label(boxBtn,text="Área Total",font=("Nunito 10 bold"),fg=principal,bg="white")
+lbl_area.place(x=650,y=10)
+input_area = Entry(boxBtn,width=20,highlightthickness=1,relief=FLAT)
+input_area.place(x=650,y=40)
+input_area.config(highlightbackground=principal, highlightcolor=principal)
+
+lbl_qtd_sementes = Label(boxBtn,text="Qtd. Sementes",font=("Nunito 10 bold"),fg=principal,bg="white")
+lbl_qtd_sementes.place(x=800,y=10)
+input_qtd_sementes = Entry(boxBtn,width=15,highlightthickness=1,relief=FLAT)
+input_qtd_sementes.place(x=800,y=40)
+input_qtd_sementes.config(highlightbackground=principal, highlightcolor=principal)
 
 lbl_resultado_carbono = Label(boxBtn,font=("Nunito 10 bold"),fg=textBlue,bg="white")
 lbl_resultado_carbono.place(x=20,y=70)
@@ -173,8 +184,8 @@ lbl_resultado_carbono.place(x=20,y=70)
 # Tabela e botão cadastrar
 def mostrar():
     # Criando a tabela
-    tabela_head = ['Cód.','Tipo Veiculo','Distancia Percorrida','Tipo do Motor','Combustível','Emissão CO²','Total para Compensar']
-    lista_itens = ver_tabela_veiculo()
+    tabela_head = ['Cód.','Fertilizante','Quilos (Kgs)','Kgs Dolomita','Área','Total de Sementes','Emissão CO²']
+    lista_itens = ver_tabela_plantacao()
 
     tree = ttk.Treeview(boxBtn, selectmode="extended",
                             columns=tabela_head, show="headings")
@@ -198,7 +209,7 @@ def mostrar():
 mostrar()
 
 btn_calcular = Button(boxBtn,width=22, height=1, text="Cadastrar Dados", relief='flat',
-        bg=secundaria, fg='white',font=("Nunito 15 bold"),command=calcEmissaoVeiculo)
+        bg=secundaria, fg='white',font=("Nunito 15 bold"),command=calcEmissaoPlantacao)
 btn_calcular.place(x=20,y=360)
 
 lbl_credits = Label(janela,text="GoCode Tecnologia, 2022",fg=secundaria,bg="white")

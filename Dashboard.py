@@ -11,7 +11,7 @@ from CalculoFertilizante import*
 
 from CadDadosFazenda import*
 from CadDadosVeiculo import*
-from CadDadosFazenda import*
+from CadDadosPlantacao import*
 
 def dashboard():
     janela = Tk()
@@ -129,7 +129,7 @@ def dashboard():
     btn_cadFazenda.place(x=10,y=10)
 
     btn_cadPlantacao = Button(boxBtn2,width=22, height=3, text="Cadastrar Dados Plantação", relief='flat',
-        bg=principal, fg='white',font=("Nunito 10 bold"))
+        bg=principal, fg='white',font=("Nunito 10 bold"),command=cadDadosPlantacao)
     btn_cadPlantacao.place(x=10,y=90)
 
     btn_cadVeiculos = Button(boxBtn2,width=22, height=3, text="Cadastrar Dados Veículos", relief='flat',

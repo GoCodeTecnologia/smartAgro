@@ -4,12 +4,12 @@ conn = lite.connect('D:\SmartAgro\database\dados.db')
 
 # with conn:
 #     cur = conn.cursor()
-#     query = "CREATE TABLE tb_emissao_veiculo(cd_ems_veiculo INTEGER PRIMARY KEY AUTOINCREMENT,tipo_veiculo TEXT,distancia_perc FLOAT,tipo_motor TEXT, combustivel TEXT, total_emissao FLOAT, total_compensa FLOAT)"
+#     query = "CREATE TABLE tb_emissao_plantacao(cd_ems_plantacao INTEGER PRIMARY KEY AUTOINCREMENT,tipo_fertilizante TEXT, quilos FLOAT, quilo_dolomita FLOAT, total_area FLOAT, total_semente FLOAT, total_emissao FLOAT)"
 #     cur.execute(query)
 
 # with conn:
 #     cur = conn.cursor()
-#     query = "DROP TABLE tb_emissao_veiculo"
+#     query = "DROP TABLE tb_emissao_plantacao"
 #     cur.execute(query)
 
 # ===========================================================================================================
@@ -54,6 +54,23 @@ def inserir_dados_veiculo(i):
 
 # ===========================================================================================================
 # Comandos banco de dados tabela fertilizante
+def ver_tabela_plantacao():
+    ver_dados = []
+    with conn:
+        cur = conn.cursor()
+        query = "SELECT * FROM tb_emissao_plantacao;"
+        cur.execute(query)
+
+        rows = cur.fetchall()
+        for row in rows:
+            ver_dados.append(row)
+    return ver_dados
+
+def inserir_dados_plantacao(i):
+    with conn:
+        cur = conn.cursor()
+        query = "INSERT INTO tb_emissao_plantacao(tipo_fertilizante,quilos,quilo_dolomita,total_area,total_semente,total_emissao)VALUES(?,?,?,?,?,?)"
+        cur.execute(query,i)
 
 # with conn:
 #     cur = conn.cursor()
