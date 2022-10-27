@@ -2,16 +2,14 @@ from tkinter import*
 from tkinter import Tk,font
 
 import sqlite3 as lite
-import numpy as np
-import matplotlib.pyplot as plt
 conn = lite.connect('D:\SmartAgro\database\dados.db')
-
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from CalculoFazenda import*
 from CalculoPlantacao import*
 from CalculoVeiculos import*
 from CalculoFertilizante import*
+
+from CadDadosFazenda import*
 
 def dashboard():
     janela = Tk()
@@ -130,13 +128,24 @@ def dashboard():
         bg=secundaria, fg='white',font=("Nunito 10 bold"))
     btn_calPlantacao.place(x=5,y=230)
 
-    # Gráfico
-    figura = plt.Figure(figsize=(9,4), dpi=70)
-    grafico = figura.add_subplot(111)
+    # ==================================================================================================
+    btn_cadFazenda = Button(boxBtn2,width=22, height=3, text="Cadastrar Dados Fazenda", relief='flat',
+        bg=principal, fg='white',font=("Nunito 10 bold"),command=cadDadosFazenda)
+    btn_cadFazenda.place(x=10,y=10)
 
-    canva = FigureCanvasTkAgg(figura,boxBtn2)
-    canva.get_tk_widget().place(x=0,y=0)
+    btn_cadVeiculos = Button(boxBtn2,width=22, height=3, text="Cadastrar Dados Veículos", relief='flat',
+        bg=principal, fg='white',font=("Nunito 10 bold"))
+    btn_cadVeiculos.place(x=210,y=10)
 
+    btn_cadPlantacao = Button(boxBtn2,width=22, height=3, text="Cadastrar Dados Plantação", relief='flat',
+        bg=principal, fg='white',font=("Nunito 10 bold"))
+    btn_cadPlantacao.place(x=10,y=90)
+
+
+
+
+
+    # ==================================================================================================
     # Texto de footer
     lbl_credits = Label(janela,text="GoCode Tecnologia, 2022",fg=secundaria,bg="white")
     lbl_credits.place(x=350,y=570)

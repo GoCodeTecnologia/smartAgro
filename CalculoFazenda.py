@@ -15,6 +15,9 @@ def calcFazenda():
 
             if mes <0:
                 messagebox.showerror("Erro","Insira uma quantidade válida")
+
+            if valor <0:
+                messagebox.showerror("Erro","Insira uma quantidade válida")
             
             co2Kwh   = 0.1355
             co2Reais = co2Kwh / 0.347

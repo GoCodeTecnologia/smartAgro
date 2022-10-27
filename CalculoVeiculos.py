@@ -40,11 +40,15 @@ def calcVeiculo():
             resultadoReais = resultadoArvores * 15
             resultadoReais = round(resultadoReais, 2)
 
+            if resultadoReais > 1000:
+                resultadoTon = resultadoReais / 100
+                lbl_resultado_carbono.config(text="{} Toneladas".format(resultadoTon))
+            elif resultadoReais <= 1000:
+                lbl_resultado_carbono.config(text="{} Kg's".format(resultadoReais))
+                
             input_tipo_combustivel.delete(0,'end')
             input_tipo_motor.delete(0,'end')
             input_distancia.delete(0,'end')
-
-            lbl_resultado_carbono.config(text="{} Kg's".format(resultadoReais))
             lbl_resultado_arvores.config(text=resultadoArvores)
 
     # Cores da aplicação
