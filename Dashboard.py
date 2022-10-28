@@ -13,6 +13,8 @@ from CadDadosFazenda import*
 from CadDadosVeiculo import*
 from CadDadosPlantacao import*
 
+from InfoFazenda import*
+
 def dashboard():
     janela = Tk()
     janela.title("SmartAgro - Dashboard")
@@ -63,19 +65,19 @@ def dashboard():
     lbl_result_bx2 = Label(box_menu2,font=("Nunito 20 bold"),fg="white",bg=principal)
     lbl_result_bx2.place(x=10,y=50)
 
-    box_menu3 = Frame(container,width=200,height=100,bg=principal)
-    box_menu3.place(x=440,y=20)
-    lbl_title_bx3 = Label(box_menu3,text="Emissão Total da Fazenda",font=("Nunito 10 bold"),fg="white",bg=principal)
-    lbl_title_bx3.place(x=10,y=10)
-    lbl_result_bx3 = Label(box_menu3,font=("Nunito 20 bold"),fg="white",bg=principal)
-    lbl_result_bx3.place(x=10,y=50)
+    # box_menu3 = Frame(container,width=200,height=100,bg=principal)
+    # box_menu3.place(x=440,y=20)
+    # lbl_title_bx3 = Label(box_menu3,text="Emissão Total da Fazenda",font=("Nunito 10 bold"),fg="white",bg=principal)
+    # lbl_title_bx3.place(x=10,y=10)
+    # lbl_result_bx3 = Label(box_menu3,font=("Nunito 20 bold"),fg="white",bg=principal)
+    # lbl_result_bx3.place(x=10,y=50)
 
-    box_menu4 = Frame(container,width=200,height=100,bg=principal)
-    box_menu4.place(x=650,y=20)
-    lbl_title_bx4 = Label(box_menu4,text="Emissão Total da Plantação",font=("Nunito 10 bold"),fg="white",bg=principal)
-    lbl_title_bx4.place(x=10,y=10)
-    lbl_result_bx4 = Label(box_menu4,text="0",font=("Nunito 20 bold"),fg="white",bg=principal)
-    lbl_result_bx4.place(x=10,y=50)
+    # box_menu4 = Frame(container,width=200,height=100,bg=principal)
+    # box_menu4.place(x=650,y=20)
+    # lbl_title_bx4 = Label(box_menu4,text="Emissão Total da Plantação",font=("Nunito 10 bold"),fg="white",bg=principal)
+    # lbl_title_bx4.place(x=10,y=10)
+    # lbl_result_bx4 = Label(box_menu4,text="0",font=("Nunito 20 bold"),fg="white",bg=principal)
+    # lbl_result_bx4.place(x=10,y=50)
 
     lbl_title_parameter = Label(container,text="Realizar Cálculos",font=("Nunito 18 bold"),fg=principal)
     lbl_title_parameter.place(x=20,y=150)
@@ -92,17 +94,17 @@ def dashboard():
 
         query_total_emissao = "SELECT SUM(total_emissao) FROM tb_emissao_veiculo;"
         query_total_compensa = "SELECT SUM(total_compensa) FROM tb_emissao_veiculo;"
-        query_total_veiculo = "SELECT SUM(total_emissao) FROM tb_emissao_veiculo;"
+
         cur.execute(query_total_emissao)
         cur_ems.execute(query_total_compensa)
-        cur_ems_veiculo.execute(query_total_veiculo)
+
 
         total_emissao = cur.fetchall()
         total_compensa = cur_ems.fetchall()
         total_veiculo = cur_ems_veiculo.fetchall()
         lbl_result_bx1.config(text=total_emissao)
         lbl_result_bx2.config(text=total_compensa)
-        lbl_result_bx3.config(text=total_veiculo)
+        # lbl_result_bx4.config(text=total_veiculo)
 
     btn_calcFazenda = Button(boxBtn,width=22, height=1, text="Emissão Energia Fazenda", relief='flat',
         bg=principal, fg='white',font=("Nunito 10 bold"),command=calcFazenda)
@@ -121,7 +123,7 @@ def dashboard():
     btn_calVeiculo.place(x=5,y=130)
 
     btn_calPlantacao = Button(boxBtn,width=22, height=1, text="Dados da Fazenda", relief='flat',
-        bg=secundaria, fg='white',font=("Nunito 10 bold"))
+        bg=secundaria, fg='white',font=("Nunito 10 bold"),command=infoFazenda)
     btn_calPlantacao.place(x=5,y=230)
     # ==================================================================================================
     btn_cadFazenda = Button(boxBtn2,width=22, height=3, text="Cadastrar Dados Fazenda", relief='flat',

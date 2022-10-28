@@ -4,12 +4,12 @@ conn = lite.connect('D:\SmartAgro\database\dados.db')
 
 # with conn:
 #     cur = conn.cursor()
-#     query = "CREATE TABLE tb_emissao_plantacao(cd_ems_plantacao INTEGER PRIMARY KEY AUTOINCREMENT,tipo_fertilizante TEXT, quilos FLOAT, quilo_dolomita FLOAT, total_area FLOAT, total_semente FLOAT, total_emissao FLOAT)"
+#     query = "CREATE TABLE tb_emissao_veiculo(cd_ems_veiculo INTEGER PRIMARY KEY AUTOINCREMENT,tipo_veiculo TEXT,distancia_perc FLOAT,tipo_motor TEXT, combustivel TEXT, total_emissao FLOAT, total_compensa FLOAT)"
 #     cur.execute(query)
 
 # with conn:
 #     cur = conn.cursor()
-#     query = "DROP TABLE tb_emissao_plantacao"
+#     query = "DROP TABLE tb_emissao_veiculo;"
 #     cur.execute(query)
 
 # ===========================================================================================================
@@ -95,8 +95,8 @@ def inserir_dados_plantacao(i):
 
 # with conn:
 #     cur = conn.cursor()
-#     #query = "SELECT SUM(total_compensa) FROM tb_emissao_veiculo;"
-#     query = "SELECT tipo_veiculo,total_emissao,total_compensa FROM tb_emissao_veiculo;"
+#     # query = "SELECT SUM(tipo_consumo) FROM tb_emissao_fazenda WHERE tipo_consumo = 'Dinheiro';"
+#     query = "SELECT * FROM tb_emissao_fazenda;"
 #     cur.execute(query)
 
 #     info = cur.fetchall()
